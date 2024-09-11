@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:insert="elements/fragments :: head"> </head>
+		
+<body>
+	
+	<!--HEADER WITH NAVBAR -->
+	<header th:replace="elements/fragments :: header('pizzas')"></header>
+	
+	<!--START OF THE MAIN SECTION -->
+	<main>
+		
+		<!--Container of the main section -->
+		<div class="container-lg border border-warning rounded bg-warning-subtle bg-opacity-25 ">
+			<div class="row ">
+				
+				<!--Main title of the page -->
+			    <div class="col-12 text-center py-3 ">
+			      <h1>Menù delle pizze</h1>
+			    </div>
+				
+				<!--Section for confermation messages -->
+				<th:block th:if="${message} != null">
+					
+					<div th:replace="elements/fragments :: succAlert(${message})"></div>
+				
+				</th:block>
+				
+				<!--Search bar and create page button  -->
+					<div class="d-flex justify-content-around">
+						<div>
+							<form th:action="@{/pizzas}" method="get" id="pizzaSearch">
+								<div class="col-12 text-center py-3 mb-3 ">
+									<div class="p-2 fs-4">Cerca la tua pizza:</div>
+									<div class="d-inline-flex ">
+										<input type="text" class="form-control mx-3" id="searchInput" name="name" placeholder="" >
+										<button type="submit" class="btn btn-secondary" id="searchSubmit" >Cerca</button>
+									</div>
+									
+								</div>
+							</form>    
+						</div >
+							
+						<div class="text-center">
+							<div class="p-2 fs-4">Crea la tua pizza</div>
+							<a th:href="@{pizzas/create}" class="btn btn-primary btn-lg ps-3"  role="button">Crea</a>
+						</div>
+					</div>
+				<!--Section used to create individual Pizza object cards -->
+				<th:block th:if="${list.size > 0}" th:each="pizza : ${list}">
+					
+					
+				    <div class="col-12 d-flex justify-content-center" >
+						
+						<!--Card-->
+						<div class="card border border-dark mb-3" style="max-width: 900px;">
+						  <div class="row g-0">
+							
+							<!--Card image and link to the individual show-->
+						    <div class="col-md-4">
+								<a th:href="@{/pizzas/{id}(id=${pizza.id})}">
+						   		   <img  th:src="@{${pizza.img_url}}" class="img-fluid rounded-start" alt="...">
+							 	 </a>
+						    </div>
+							
+							<!--Card body-->
+						    <div class="col-md-8">
+						      <div class="card-body">
+								
+								<!--Name/show, edit and delete group-->
+								<div class="border-bottom border-dark d-flex justify-content-between pb-2">
+									<!--Object name and link to the individual show-->
+									<div >
+							        	<h5 class="card-title"><a class=" link-dark  link-underline-warning"  th:href="@{/pizzas/{id}(id=${pizza.id})}">[[${pizza.nome}]]</a></h5>
+									</div>
+									<!--Edit and Delete buttons-->
+									<div >
+										<a class="btn btn-success btn-sm me-1"  th:href="@{/pizzas/edit/{id}(id=${pizza.id})}">Modifica</a>
+										
+										
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-warning" data-bs-toggle="modal" th:data-bs-target="'#delete-modal' + ${pizza.id}">
+										  Elimina
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" th:id="'delete-modal' + ${pizza.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h1 class="modal-title fs-5" id="staticBackdropLabel">Elimina pizza</h1>
+										        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										      </div>
+										      <div class="modal-body">
+										      	Si è sicuri di voler cancellare la pizza [[${pizza.nome}]]?
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+												<form class="d-inline-block" th:action="@{/pizzas/delete/{id}(id=${pizza.id})}" method="POST">
+													<button type="submit" class="btn btn-warning btn-sm " >Elimina</button>	
+												</form>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+										
+										
+									</div>
+									
+									
+								</div>
+								
+								
+								<!--Object info-->
+								<h6 class="mb-1 mt-2" >Ingredienti:</h6>
+						        <p class="card-text" th:text="${pizza.descrizione}"></p>
+								<h6 class="mb-1 mt-2" >Prezzo:</h6>
+								<h6 class="card-title" th:text="${T(org.lessons.java.spring.utils.MiaPizzeriaUtils).priceFormatter(pizza.prezzo)} "></h6>
+						      </div>
+							  
+						    </div>
+						  </div>
+						</div>
+				    </div>
+				</th:block>
+				
+				<!--SHOWED ONLY IF THERE ARE NO PIZZA OBJECTS TO SHOW -->
+				<div th:unless="${list.size > 0}">
+					<h2 class="text-danger text-center">Non è stata trovata nessuna pizza nel menù</h2>
+				</div>
+			   
+			  </div>
+		</div>
+
+	</main>
+	<!--END OF THE MAIN SECTION -->
+	
+	<!--FOOTER -->
+	<footer th:replace="elements/fragments :: footer" ></footer>
+	
+	<!--Scripts links -->
+	<div th:insert="elements/fragments :: scripts">
+	</div>
+	
+
+	
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:insert="elements/fragments :: head">
+		
+<body>
+	
+	<!--HEADER WITH NAVBAR -->
+	<header th:replace="elements/fragments :: header('pizzas')"></header>
+	
+	<!--START OF THE MAIN SECTION -->
+	<main>
+		
+		<!--Container of the main section -->
+		<div class="container-lg border border-warning rounded bg-warning-subtle bg-opacity-25 ">
+			<div class="row ">
+				
+				<!--Section with the object info-->
+				<section th:object="${pizza}">
+					
+					<!--Name of the object-->
+					    <div class="col-12 text-center py-2 ">
+					    	<h2>[[*{nome}]]</h2>
+					    </div>
+
+					<!--Image of the object-->
+					    <div class="col-12 text-center py-2 ">
+					    	<img th:src="@{*{img_url}}" class="img-fluid border border-warning img-detail" >
+					    </div>
+					
+					<!--Description of the object-->
+					    <div class="col-12 text-center py-2 ">
+							<h6>Ingredienti: </h6>
+					    	<p th:text="*{descrizione}"></p>
+					    </div>
+						
+					<!--Price attribute-->
+					    <div class="col-12 text-center py-2 ">
+							<h6>prezzo: </h6>
+					    	<h6 class="card-title pb-2" th:text="*{T(org.lessons.java.spring.utils.MiaPizzeriaUtils).priceFormatter(prezzo)} "></h6>
+					    </div>
+						
+					
+					    <div class="col-12 py-2 d-flex">
+							
+							<!--Description of the object **Variables have Null value at the moment**-->
+							<div class="col-10 text-start fw-light ps-2 ">
+								<p class="fw-light">Created at: [[*{createdAt}]] </p>
+								<p>Updated at: [[*{updatedAt}]] </p>
+							</div>
+							<!--Link to the index page-->
+							<div class="col-2 ">
+								<a th:href="@{/pizzas}" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true">Back</a>
+							</div>
+					    </div>	
+						
+					
+				</section>
+				
+			
+			   
+			  </div>
+		</div>
+
+	</main>
+	<!--END OF THE MAIN SECTION -->
+	
+	<!--FOOTER -->
+	<footer th:replace="elements/fragments :: footer" ></footer>
+	
+	<!--Scripts links -->
+	<div th:insert="elements/fragments :: scripts">
+	</div>
+	
+</body>
+</html>

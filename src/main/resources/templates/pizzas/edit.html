@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:insert="elements/fragments :: head">
+		
+<body>
+	
+	<!--HEADER WITH NAVBAR -->
+	<header th:replace="elements/fragments :: header('pizzas')"></header>
+	
+	<!--START OF THE MAIN SECTION -->
+	<main>
+		
+		<!--Container of the main section -->
+		<div class="container-lg border border-warning rounded bg-warning-subtle bg-opacity-25 ">
+			<div class="row ">
+			
+				
+				<!--Section with the object info-->
+				<section th:object="${pizza}">
+					
+					<h2>Modifica la pizza [[*{nome}]]</h2>
+						
+					<form
+					id="pizza-form"
+					th:object="${pizza}"
+					th:action="@{/pizzas/edit/{id}( id = ${pizza.id})}"
+					method="POST"
+					>
+						
+						
+						<div class="mb-3 pt-2">
+						    <label for="nome" class="form-label">Nome:</label>
+						    <input type="text" class="form-control" id="nome" placeholder="Inserisci il nome" th:field="*{nome}" th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback">
+								<ul>
+								<li class="alert alert-danger" th:each="err : ${#fields.errors('nome')}" th:text="${err}"></li>
+								</ul>
+							</div>
+						</div> 
+						
+						<div class="mb-3">
+						    <label for="exampleInputPassword1" class="form-label">Descrizione:</label>
+						    <input type="text" class="form-control" id="descrizione" placeholder="Inserisci la descrizione" th:field="*{descrizione}" th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
+								<ul>
+								<li class="alert alert-danger" th:each="err : ${#fields.errors('descrizione')}" th:text="${err}"></li>
+								</ul>
+							</div>
+						</div>
+						
+						<div class="mb-3 pt-2 visually-hidden">
+						    <label for="img" class="form-label">Nome:</label>
+						    <input type="text" class="form-control" id="img"  th:field="*{img_url}" >
+						</div> 
+						
+						<div class="mb-3 " >
+							<label class="form-label" for="prezzo">Prezzo:</label>
+						    <input class="form-control w-25" step="0.01" value="00.00" type="number" id="prezzo" th:field="*{prezzo}"  th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('prezzo')}" class="invalid-feedback">
+								<ul>
+								<li class="alert alert-danger" th:each="err : ${#fields.errors('prezzo')}" th:text="${err}"></li>
+								</ul>
+							</div>
+						</div>
+						 
+						<div class="mb-3">
+							<button type="submit" class="btn btn-primary tn-lg">Aggiorna</button>
+							<button type="reset" class="btn btn-warning tn-lg">Reset</button>
+							
+						</div>
+						 
+					  
+					</form>
+					
+					
+				</section>
+				
+			
+			   
+			  </div>
+		</div>
+
+	</main>
+	<!--END OF THE MAIN SECTION -->
+	
+	<!--FOOTER -->
+	<footer th:replace="elements/fragments :: footer" ></footer>
+	
+	<!--Scripts links -->
+	<div th:insert="elements/fragments :: scripts">
+	</div>
+	
+</body>
+</html>
