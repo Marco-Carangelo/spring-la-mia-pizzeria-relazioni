@@ -121,6 +121,18 @@ public class Pizza {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
+
+
+
+	public List<Offerta> getOfferte() {
+		return offerte;
+	}
+
+
+
+	public void setOfferte(List<Offerta> offerte) {
+		this.offerte = offerte;
+	}
 	
 	
 	
