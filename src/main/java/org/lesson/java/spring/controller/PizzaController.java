@@ -3,6 +3,7 @@ package org.lesson.java.spring.controller;
 import java.util.List;
 
 import org.lesson.java.spring.model.Pizza;
+import org.lessons.java.spring.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +23,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/pizzas")
 public class PizzaController {
 	
-	@Autowired
-	private PizzaRepository repository;
+	public PizzaService service;
 	
 	@GetMapping
 	public String index(Model model, @RequestParam( name = "name", required = false ) String name) {
@@ -32,11 +32,11 @@ public class PizzaController {
 		
 		if (name != null && !name.isEmpty()) {
 			
-			result = repository.findByNomeStartsWith(name);
+			result = service.searchPizzas(name);
 			
 		}else {
 			
-			result = repository.findAll();
+			result = service.findPizzas();
 		}
 		
 		model.addAttribute("list", result);
@@ -45,13 +45,13 @@ public class PizzaController {
 	
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") Integer id , Model model) {
-		model.addAttribute("pizza", repository.findById(id).get());
+		model.addAttribute("pizza", service.findPizzaById(id));
 		return "/pizzas/show";
 	}
 	
 	@GetMapping("/findByNome/{nome}")
 	public String findByNome(@PathVariable("nome")  String nome , Model model) {
-		model.addAttribute("list", repository.findByNomeStartsWith(nome));
+		model.addAttribute("list", service.searchPizzas(nome));
 		return "/pizzas/index";
 	}
 
@@ -75,7 +75,7 @@ public class PizzaController {
 		
 		formPizza.setImg_url("/img/logo-mia-pizzeria.png");
 		
-		repository.save(formPizza);
+		service.createPizza(formPizza);
 		
 		attributes.addFlashAttribute("message", "La pizza  " + formPizza.getNome() + " è stata creata");
 		
@@ -87,7 +87,7 @@ public class PizzaController {
 	public String edit(
 			@PathVariable("id") Integer id,
 			Model model) {
-		model.addAttribute("pizza", repository.findById(id).get());
+		model.addAttribute("pizza", service.findPizzaById(id));
 		return "/pizzas/edit";
 	}
 	
@@ -102,7 +102,7 @@ public class PizzaController {
 			return "/pizzas/edit";
 		}
 		
-		repository.save(formPizza);
+		service.editPizza(formPizza);
 		
 		attributes.addFlashAttribute("message", "La pizza  " + formPizza.getNome() + " è stata aggiornata");
 		
@@ -113,7 +113,7 @@ public class PizzaController {
 	public String delete(@PathVariable("id") Integer id,
 			RedirectAttributes attributes ) {
 		
-		repository.deleteById(id);
+		service.deletePizzaById(id);
 		
 		attributes.addFlashAttribute("message", "La pizza con id " + id + " è stata eliminata");
 		
