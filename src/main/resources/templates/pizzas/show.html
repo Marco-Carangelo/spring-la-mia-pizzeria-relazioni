@@ -41,6 +41,15 @@
 					    	<h6 class="card-title pb-2" th:text="*{T(org.lessons.java.spring.utils.MiaPizzeriaUtils).priceFormatter(prezzo)} "></h6>
 					    </div>
 						
+					<!--List of discount-->
+						<div class="col-12 text-center py-2 mb-2">
+							<h6>Lista delle offerte </h6>
+							<ul>
+								<li th:each="offerta : *{offerte}">
+									<span>[[${offerta.titoloOfferta}]] dal [[${offerta.inizioOfferta}]] al [[${offerta.inizioOfferta}]]. Sconto del [[${offerta.percentualeSconto}]]% </span>
+								</li>
+							</ul>
+					    </div>
 					
 					    <div class="col-12 py-2 d-flex">
 							
