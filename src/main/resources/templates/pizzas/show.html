@@ -44,11 +44,20 @@
 					<!--List of discount-->
 						<div class="col-12 text-center py-2 mb-2">
 							<h6>Lista delle offerte </h6>
-							<ul>
-								<li th:each="offerta : *{offerte}">
-									<span>[[${offerta.titoloOfferta}]] dal [[${offerta.inizioOfferta}]] al [[${offerta.inizioOfferta}]]. Sconto del [[${offerta.percentualeSconto}]]% </span>
-								</li>
-							</ul>
+							
+							<ul class="d-flex flex-wrap">
+									<li class="m-2" th:each="offerta : *{offerte}" type=none>	
+										<div class="card my-2" style="width: 18rem;">
+										  <ul class="list-group list-group-flush">
+										    <li class="list-group-item"><strong>Titolo:</strong> [[${offerta.titoloOfferta}]]</li>
+										    <li class="list-group-item"><strong>Data inizio:</strong> [[${offerta.inizioOfferta}]]</li>
+										    <li class="list-group-item"><strong>Data fine:</strong> [[${offerta.inizioOfferta}]]</li>
+											<li class="list-group-item"><strong>Percentuale di sconto:</strong> [[${offerta.percentualeSconto}]]%</li>
+										  </ul>
+										</div>
+									</li>
+								</ul>
+							
 					    </div>
 					
 					    <div class="col-12 py-2 d-flex">
