@@ -82,6 +82,14 @@ public class Offerta {
 	public void setPizza(Pizza pizza) {
 		this.pizza = pizza;
 	}
+
+	public Integer getPercentualeSconto() {
+		return percentualeSconto;
+	}
+
+	public void setPercentualeSconto(Integer percentualeSconto) {
+		this.percentualeSconto = percentualeSconto;
+	}
 	
 	
 
