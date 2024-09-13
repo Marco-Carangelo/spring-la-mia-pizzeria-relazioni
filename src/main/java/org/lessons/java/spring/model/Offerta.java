@@ -1,4 +1,4 @@
-package org.lesson.java.spring.model;
+package org.lessons.java.spring.model;
 
 import java.time.LocalDateTime;
 

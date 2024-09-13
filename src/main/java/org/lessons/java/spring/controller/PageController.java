@@ -1,4 +1,4 @@
-package org.lesson.java.spring.controller;
+package org.lessons.java.spring.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

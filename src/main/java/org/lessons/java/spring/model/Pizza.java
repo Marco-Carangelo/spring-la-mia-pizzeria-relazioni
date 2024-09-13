@@ -1,4 +1,4 @@
-package org.lesson.java.spring.model;
+package org.lessons.java.spring.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -50,10 +50,12 @@ public class Pizza {
 	@OneToMany(mappedBy = "pizza")
 	private List<Offerta> offerte;
 	
+	
+	
+	
 	public Pizza() {
 		
 	}
-	
 	
 
 	//Getters and Setters
@@ -135,6 +137,7 @@ public class Pizza {
 	}
 	
 	
+
 	
 	
 

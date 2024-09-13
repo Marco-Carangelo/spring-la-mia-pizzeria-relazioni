@@ -1,9 +1,10 @@
-package org.lesson.java.spring.controller;
+package org.lessons.java.spring.controller;
 
 import java.util.List;
 
-import org.lesson.java.spring.model.Pizza;
+import org.lessons.java.spring.model.Pizza;
 import org.lessons.java.spring.service.PizzaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +23,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/pizzas")
 public class PizzaController {
 	
-	public PizzaService service;
+	@Autowired
+	private PizzaService pizzaService;
 	
 	@GetMapping
 	public String index(Model model, @RequestParam( name = "name", required = false ) String name) {
@@ -31,11 +33,11 @@ public class PizzaController {
 		
 		if (name != null && !name.isEmpty()) {
 			
-			result = service.searchPizzas(name);
+			result = pizzaService.searchPizzas(name);
 			
 		}else {
 			
-			result = service.findPizzas();
+			result = pizzaService.findPizzas();
 		}
 		
 		model.addAttribute("list", result);
@@ -44,13 +46,13 @@ public class PizzaController {
 	
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") Integer id , Model model) {
-		model.addAttribute("pizza", service.findPizzaById(id));
+		model.addAttribute("pizza", pizzaService.findPizzaById(id));
 		return "/pizzas/show";
 	}
 	
 	@GetMapping("/findByNome/{nome}")
 	public String findByNome(@PathVariable("nome")  String nome , Model model) {
-		model.addAttribute("list", service.searchPizzas(nome));
+		model.addAttribute("list", pizzaService.searchPizzas(nome));
 		return "/pizzas/index";
 	}
 
@@ -74,7 +76,7 @@ public class PizzaController {
 		
 		formPizza.setImg_url("/img/logo-mia-pizzeria.png");
 		
-		service.createPizza(formPizza);
+		pizzaService.createPizza(formPizza);
 		
 		attributes.addFlashAttribute("message", "La pizza  " + formPizza.getNome() + " è stata creata");
 		
@@ -86,7 +88,7 @@ public class PizzaController {
 	public String edit(
 			@PathVariable("id") Integer id,
 			Model model) {
-		model.addAttribute("pizza", service.findPizzaById(id));
+		model.addAttribute("pizza", pizzaService.findPizzaById(id));
 		return "/pizzas/edit";
 	}
 	
@@ -101,7 +103,7 @@ public class PizzaController {
 			return "/pizzas/edit";
 		}
 		
-		service.editPizza(formPizza);
+		pizzaService.editPizza(formPizza);
 		
 		attributes.addFlashAttribute("message", "La pizza  " + formPizza.getNome() + " è stata aggiornata");
 		
@@ -112,7 +114,7 @@ public class PizzaController {
 	public String delete(@PathVariable("id") Integer id,
 			RedirectAttributes attributes ) {
 		
-		service.deletePizzaById(id);
+		pizzaService.deletePizzaById(id);
 		
 		attributes.addFlashAttribute("message", "La pizza con id " + id + " è stata eliminata");
 		
