@@ -2,8 +2,8 @@ package org.lessons.java.spring.service;
 
 import java.util.List;
 
-import org.lessons.java.spring.controller.PizzaRepository;
 import org.lessons.java.spring.model.Pizza;
+import org.lessons.java.spring.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
