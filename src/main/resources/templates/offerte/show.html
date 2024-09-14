@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:insert="elements/fragments :: head"> </head>
+		
+<body>
+	
+	<!--HEADER WITH NAVBAR -->
+	<header th:replace="elements/fragments :: header('pizzas')"></header>
+	
+	<!--START OF THE MAIN SECTION -->
+	<main>
+		
+		<!--Container of the main section -->
+		<div class="container-lg border border-warning rounded bg-warning-subtle bg-opacity-25 ">
+			<div class="row text-center d-flex justify-content-center">
+				
+				<!--Main title of the page -->
+			    <div class="col-12 text-center py-3 ">
+			      <h1>Dettaglio offerta:</h1>
+			    </div>
+				
+	
+				<div class="card my-4 " style="width: 30rem;">
+				  <ul class="list-group list-group-flush">
+					<li class="list-group-item"><strong>Id offerta:</strong> [[${offerta.id}]]</li>
+				    <li class="list-group-item"><strong>Titolo:</strong> [[${offerta.titoloOfferta}]]</li>
+				    <li class="list-group-item"><strong>Data inizio:</strong> [[${offerta.inizioOfferta}]]</li>
+				    <li class="list-group-item"><strong>Data fine:</strong> [[${offerta.inizioOfferta}]]</li>
+					<li class="list-group-item"><strong>Percentuale di sconto:</strong> [[${offerta.percentualeSconto}]]%</li>
+				  </ul>
+				</div>
+			   
+			  </div>
+		</div>
+
+	</main>
+	<!--END OF THE MAIN SECTION -->
+	
+	<!--FOOTER -->
+	<footer th:replace="elements/fragments :: footer" ></footer>
+	
+	<!--Scripts links -->
+	<div th:insert="elements/fragments :: scripts">
+	</div>
+	
+
+	
+</body>
+</html>
