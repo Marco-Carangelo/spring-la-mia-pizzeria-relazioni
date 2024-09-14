@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:insert="elements/fragments :: head"> </head>
+		
+<body>
+	
+	<!--HEADER WITH NAVBAR -->
+	<header th:replace="elements/fragments :: header('pizzas')"></header>
+	
+	<!--START OF THE MAIN SECTION -->
+	<main>
+		
+		<!--Container of the main section -->
+		<div class="container-lg border border-warning rounded bg-warning-subtle bg-opacity-25 ">
+			<div class="row ">
+				
+				<!--Main title of the page -->
+			    <div class="col-12 text-center py-3 ">
+			      <h1>Lista delle offerte</h1>
+			    </div>
+				
+				<!--Section for confermation messages -->
+			<!--	<th:block th:if="${message} != null">
+					
+					<div th:replace="elements/fragments :: succAlert(${message})"></div>
+				
+				</th:block> -->
+				
+				<!--Search bar and create page button  -->
+				<!--	<div class="d-flex justify-content-around">
+						<div>
+							<form th:action="@{/pizzas}" method="get" id="pizzaSearch">
+								<div class="col-12 text-center py-3 mb-3 ">
+									<div class="p-2 fs-4">Cerca la tua pizza:</div>
+									<div class="d-inline-flex ">
+										<input type="text" class="form-control mx-3" id="searchInput" name="name" placeholder="" >
+										<button type="submit" class="btn btn-secondary" id="searchSubmit" >Cerca</button>
+									</div>
+									
+								</div>
+							</form>    
+						</div >
+							
+						<div class="text-center">
+							<div class="p-2 fs-4">Crea la tua pizza</div>
+							<a th:href="@{pizzas/create}" class="btn btn-primary btn-lg ps-3"  role="button">Crea</a>
+						</div>
+					</div> -->
+					
+				<!--Table with Offerta objects list -->
+				<div class="d-flex justify-content-center" th:if="${list.size > 0}" >
+					<table class="table w-75 table-striped ">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Titolo</th>
+					      <th scope="col">Percentuale Sconto</th>
+					      <th scope="col">Data di inizio</th>
+						  <th scope="col">Data di fine</th>
+						  <th class="button-headers"></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr th:each="offerta: ${list}" th:object="${offerta}">
+					      <td>[[*{id}]]</td>
+					      <td>[[*{titoloOfferta}]]</td>
+						  <td>[[*{percentualeSconto}]]%</td>
+					      <td>[[*{inizioOfferta}]]</td>
+					      <td>[[*{fineOfferta}]]</td>
+						  <td class>
+							
+							<a th:href="@{/offerte/{id}(id=${offerta.id})}" class="btn btn-sm btn-primary">
+								Show
+							</a>
+						
+							<a  class="btn btn-sm btn-success">
+								Edit
+							</a>
+						  </td>
+					    </tr>
+					  </tbody>
+					</table>
+				</div>
+				<!--SHOWED ONLY IF THERE ARE NO PIZZA OBJECTS TO SHOW -->
+				<div th:unless="${list.size > 0}">
+					<h2 class="text-danger text-center">Non è stata trovata nessuna offerta</h2>
+				</div>
+			   
+			  </div>
+		</div>
+
+	</main>
+	<!--END OF THE MAIN SECTION -->
+	
+	<!--FOOTER -->
+	<footer th:replace="elements/fragments :: footer" ></footer>
+	
+	<!--Scripts links -->
+	<div th:insert="elements/fragments :: scripts">
+	</div>
+	
+
+	
+</body>
+</html>
