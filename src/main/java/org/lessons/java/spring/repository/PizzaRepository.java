@@ -1,4 +1,4 @@
-package org.lessons.java.spring.controller;
+package org.lessons.java.spring.repository;
 
 import java.util.List;
 
