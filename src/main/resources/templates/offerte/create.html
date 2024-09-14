@@ -20,15 +20,16 @@
 				<!--Section with the object info-->
 				<section>
 					
-					<h2>Crea una nuova offerta</h2>
+					<h2>Crea una nuova offerta per la pizza [[${offerta.pizza.nome}]]</h2>
 						
 					<form
 					id="offerta-form"
 					th:object="${offerta}"
-					th:action="@{/offerta/create}"
+					th:action="@{/offerte/create}"
 					method="POST"
 					>
 					
+					<input type="hidden" th:field="*{pizza}" id="pizza">
 						
 						
 						<div class="mb-3 pt-2">
@@ -54,7 +55,7 @@
 						
 						<div class="mb-3 pt-2">
 						    <label for="inizioOfferta" class="form-label">Data di inizio dell'offerta':</label>
-						    <input type="date" class="form-control" id="inizioOfferta" th:field="*{inizioOfferta}" th:errorClass="is-invalid">
+						    <input type="datetime-local" class="form-control" id="inizioOfferta" th:field="*{inizioOfferta}" th:errorClass="is-invalid">
 							<div th:if="${#fields.hasErrors('inizioOfferta')}" class="invalid-feedback">
 								<ul>
 								<li class="alert alert-danger" th:each="err : ${#fields.errors('inizioOfferta')}" th:text="${err}"></li>
@@ -63,7 +64,7 @@
 						</div> 
 						<div class="mb-3 pt-2">
 						    <label for="fineOfferta" class="form-label">Data di fine dell'offerta:</label>
-						    <input type="date" class="form-control" id="fineOfferta" th:field="*{fineOfferta}" th:errorClass="is-invalid">
+						    <input type="datetime-local" class="form-control" id="fineOfferta" th:field="*{fineOfferta}" th:errorClass="is-invalid">
 							<div th:if="${#fields.hasErrors('fineOfferta')}" class="invalid-feedback">
 								<ul>
 								<li class="alert alert-danger" th:each="err : ${#fields.errors('fineOfferta')}" th:text="${err}"></li>
