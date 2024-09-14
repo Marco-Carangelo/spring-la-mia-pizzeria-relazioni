@@ -21,5 +21,9 @@ public class OffertaService {
 		return repository.findById(id).get();
 	}
 	
+	public void createOfferta(Offerta offerta) {
+		repository.save(offerta);
+	}
+	
 	
 }
