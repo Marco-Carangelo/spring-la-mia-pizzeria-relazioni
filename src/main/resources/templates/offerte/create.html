@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:insert="elements/fragments :: head">
+		
+<body>
+	
+	<!--HEADER WITH NAVBAR -->
+	<header th:replace="elements/fragments :: header('offerte')"></header>
+	
+	<!--START OF THE MAIN SECTION -->
+	<main>
+		
+		<!--Container of the main section -->
+		<div class="container-lg border border-warning rounded bg-warning-subtle bg-opacity-25 ">
+			<div class="row ">
+				
+	
+				<!--Section with the object info-->
+				<section>
+					
+					<h2>Crea una nuova offerta</h2>
+						
+					<form
+					id="offerta-form"
+					th:object="${offerta}"
+					th:action="@{/offerta/create}"
+					method="POST"
+					>
+					
+						
+						
+						<div class="mb-3 pt-2">
+						    <label for="nome" class="form-label">Titolo dell'offerta:</label>
+						    <input type="text" class="form-control" id="titoloOfferta" placeholder="Inserisci il titolo" th:field="*{titoloOfferta}" th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('titoloOfferta')}" class="invalid-feedback">
+								<ul>
+								<li class="alert alert-danger" th:each="err : ${#fields.errors('titoloOfferta')}" th:text="${err}"></li>
+								</ul>
+							</div>
+						</div> 
+					
+						
+						<div class="mb-3 " >
+							<label class="form-label" for="prezzo">Precentuale di sconto:</label>
+						    <input class="form-control w-25" step="1" value="5" type="number" id="percentualeSconto" th:field="*{percentualeSconto}"  th:errorClass="is-invalid" min="5" max="50">
+							<div th:if="${#fields.hasErrors('percentualeSconto')}" class="invalid-feedback">
+								<ul>
+								<li class="alert alert-danger" th:each="err : ${#fields.errors('percentualeSconto')}" th:text="${err}"></li>
+								</ul>
+							</div>
+						</div>
+						
+						<div class="mb-3 pt-2">
+						    <label for="inizioOfferta" class="form-label">Data di inizio dell'offerta':</label>
+						    <input type="date" class="form-control" id="inizioOfferta" th:field="*{inizioOfferta}" th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('inizioOfferta')}" class="invalid-feedback">
+								<ul>
+								<li class="alert alert-danger" th:each="err : ${#fields.errors('inizioOfferta')}" th:text="${err}"></li>
+								</ul>
+							</div>
+						</div> 
+						<div class="mb-3 pt-2">
+						    <label for="fineOfferta" class="form-label">Data di fine dell'offerta:</label>
+						    <input type="date" class="form-control" id="fineOfferta" th:field="*{fineOfferta}" th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('fineOfferta')}" class="invalid-feedback">
+								<ul>
+								<li class="alert alert-danger" th:each="err : ${#fields.errors('fineOfferta')}" th:text="${err}"></li>
+								</ul>
+							</div>
+						</div> 
+						 
+						<div class="mb-3">
+							<button type="submit" class="btn btn-primary tn-lg">Crea</button>
+							<button type="reset" class="btn btn-warning tn-lg">Reset</button>
+							
+						</div>
+						 
+					  
+					</form>
+					
+					
+				</section>
+				
+			
+			   
+			  </div>
+		</div>
+
+	</main>
+	<!--END OF THE MAIN SECTION -->
+	
+	<!--FOOTER -->
+	<footer th:replace="elements/fragments :: footer" ></footer>
+	
+	<!--Scripts links -->
+	<div th:insert="elements/fragments :: scripts">
+	</div>
+	
+</body>
+</html>
