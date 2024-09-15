@@ -25,5 +25,8 @@ public class OffertaService {
 		repository.save(offerta);
 	}
 	
+	public void editOfferta(Offerta offerta) {
+		repository.save(offerta);
+	}
 	
 }
