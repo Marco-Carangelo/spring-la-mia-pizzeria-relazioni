@@ -67,4 +67,29 @@ public class OffertaController {
 		
 		return "redirect:/offerte";
 	}
+	
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") Integer id ,Model model) {
+		model.addAttribute("offerta", offertaService.findOffertaById(id));
+		return "/offerte/edit";
+	}
+
+	@PostMapping("/edit/")
+	public String update(
+			@Valid @ModelAttribute("offerta") Offerta formOfferta,
+			BindingResult bindingResult,
+			Model model,
+			RedirectAttributes attributes ){
+		
+		if(bindingResult.hasErrors()) {
+			return "/offerte/edit";
+		}
+		
+		
+		offertaService.editOfferta(formOfferta);
+		
+		attributes.addFlashAttribute("message", "L'offerta  " + formOfferta.getTitoloOfferta() + " è stata aggiornata");
+		
+		return "redirect:/offerte";
+	}
 }
