@@ -31,8 +31,20 @@
 					
 					<!--Description of the object-->
 					    <div class="col-12 text-center py-2 ">
-							<h6>Ingredienti: </h6>
+							<h6>Descrizione: </h6>
 					    	<p th:text="*{descrizione}"></p>
+					    </div>
+						
+					<!--Ingredients of the object-->
+					    <div class="col-12 text-center py-2 ">
+							<h6>Ingredienti: </h6>
+					    	
+							<th:block th:each="ingrediente : *{ingredienti}">
+							<span>-[[${ingrediente.nomeIngrediente}]]-</span>	
+							</th:block>
+
+							
+							
 					    </div>
 						
 					<!--Price attribute-->
