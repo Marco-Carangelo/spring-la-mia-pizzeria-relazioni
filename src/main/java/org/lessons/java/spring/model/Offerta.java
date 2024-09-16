@@ -33,10 +33,10 @@ public class Offerta {
 	@Max(50)
 	private Integer percentualeSconto;
 	
-	@UpdateTimestamp
+	
 	private LocalDateTime inizioOfferta;
 	
-	@UpdateTimestamp
+	
 	private LocalDateTime fineOfferta;
 	
 	@ManyToOne
