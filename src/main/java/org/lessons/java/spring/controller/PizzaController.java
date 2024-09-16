@@ -94,6 +94,7 @@ public class PizzaController {
 			@PathVariable("id") Integer id,
 			Model model) {
 		model.addAttribute("pizza", pizzaService.findPizzaById(id));
+		model.addAttribute("listaIngredienti", ingredienteService.findIngredienti());
 		return "/pizzas/edit";
 	}
 	
