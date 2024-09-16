@@ -74,7 +74,7 @@ public class OffertaController {
 		return "/offerte/edit";
 	}
 
-	@PostMapping("/edit/")
+	@PostMapping("/edit/{id}")
 	public String update(
 			@Valid @ModelAttribute("offerta") Offerta formOfferta,
 			BindingResult bindingResult,

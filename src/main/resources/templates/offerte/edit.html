@@ -25,7 +25,7 @@
 					<form
 					id="offerta-form"
 					th:object="${offerta}"
-					th:action="@{/offerte/edit/}"
+					th:action="@{/offerte/edit/{id}( id = ${offerta.id})}"
 					method="POST"
 					>
 					
