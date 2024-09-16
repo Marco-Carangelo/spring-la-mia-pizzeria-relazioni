@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:insert="elements/fragments :: head"> </head>
+		
+<body>
+	
+	<!--HEADER WITH NAVBAR -->
+	<header th:replace="elements/fragments :: header('ingredienti')"></header>
+	
+	<!--START OF THE MAIN SECTION -->
+	<main>
+		
+		<!--Container of the main section -->
+		<div class="container-lg border border-warning rounded bg-warning-subtle bg-opacity-25 ">
+			<div class="row ">
+				
+				<!--Main title of the page -->
+			    <div class="col-12 text-center py-3 ">
+			      <h1>Lista delle ingredienti</h1>
+			    </div>
+				
+				<!--Section for confermation messages -->
+			<!--	<th:block th:if="${message} != null">
+					
+					<div th:replace="elements/fragments :: succAlert(${message})"></div>
+				
+				</th:block> -->
+				
+				<!--Search bar and create page button  -->
+				<div class="d-flex justify-content-around mb-4">
+							
+					<div class="text-center">
+						<div class="p-2 fs-4">Crea un nuovo ingrediente</div>
+						<a th:href="@{ingredienti/create}" class="btn btn-primary btn-lg ps-3"  role="button">Crea</a>
+					</div>
+				</div>
+					
+				<!--Table with Ingrediente objects list -->
+				<div class="d-flex justify-content-center" th:if="${list.size > 0}" >
+					<table class="table w-75 table-striped ">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Ingrediente</th>
+						  <th class="button-headers"></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr th:each="ingrediente: ${list}" th:object="${ingrediente}">
+					      <td>[[*{id}]]</td>
+					      <td>[[*{nomeIngrediente}]]</td>
+						  <td class>
+							
+							
+							<a th:href="@{/ingredienti}" class="btn btn-sm btn-warning">
+								Cancella
+							</a>
+						  </td>
+					    </tr>
+					  </tbody>
+					</table>
+				</div>
+				<!--SHOWED ONLY IF THERE ARE NO INGREDIENTS OBJECTS TO SHOW -->
+				<div th:unless="${list.size > 0}">
+					<h2 class="text-danger text-center">Non è stato trovato nessun ingrediente</h2>
+				</div>
+			   
+			  </div>
+		</div>
+
+	</main>
+	<!--END OF THE MAIN SECTION -->
+	
+	<!--FOOTER -->
+	<footer th:replace="elements/fragments :: footer" ></footer>
+	
+	<!--Scripts links -->
+	<div th:insert="elements/fragments :: scripts">
+	</div>
+	
+
+	
+</body>
+</html>
