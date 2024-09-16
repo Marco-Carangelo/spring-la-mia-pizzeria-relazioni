@@ -3,6 +3,7 @@ package org.lessons.java.spring.controller;
 import java.util.List;
 
 import org.lessons.java.spring.model.Pizza;
+import org.lessons.java.spring.service.IngredienteService;
 import org.lessons.java.spring.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class PizzaController {
 	
 	@Autowired
 	private PizzaService pizzaService;
+	
+	@Autowired
+	private IngredienteService ingredienteService;
 	
 	@GetMapping
 	public String index(Model model, @RequestParam( name = "name", required = false ) String name) {
@@ -60,6 +64,7 @@ public class PizzaController {
 	@GetMapping("/create")
 	public String create(Model model) {
 		model.addAttribute("pizza", new Pizza());
+		model.addAttribute("listaIngredienti", ingredienteService.findIngredienti());
 		return "/pizzas/create";
 	}
 	
