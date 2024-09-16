@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -55,5 +56,16 @@ public class IngredienteController {
 		attributes.addFlashAttribute("message", "L'ingrediente " + formIngrediente.getNomeIngrediente() + " è stato creato");
 		
 		return "redirect:/ingredienti";
+	}
+	
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer id,
+			RedirectAttributes attributes ) {
+		
+		ingredienteService.deleteIngredienteById(id);
+		
+		attributes.addFlashAttribute("message", "L'ingrediente con id " + id + " è stato eliminato");
+		
+		return "redirect:/ingredienti ";
 	}
 }
