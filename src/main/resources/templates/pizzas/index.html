@@ -116,6 +116,16 @@
 								<!--Object info-->
 								<h6 class="mb-1 mt-2" >Descrizione:</h6>
 						        <p class="card-text" th:text="${pizza.descrizione}"></p>
+								
+								<!--Ingredients of the object-->
+							    
+								<h6 class="mb-1 mt-2">Ingredienti: </h6>
+						    	
+								<th:block th:each="ingrediente : ${pizza.ingredienti}">
+									<span>-[[${ingrediente.nomeIngrediente}]]-</span>	
+								</th:block>
+
+
 								<h6 class="mb-1 mt-2" >Prezzo:</h6>
 								<h6 class="card-title" th:text="${T(org.lessons.java.spring.utils.MiaPizzeriaUtils).priceFormatter(pizza.prezzo)} "></h6>
 						      </div>
