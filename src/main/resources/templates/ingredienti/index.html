@@ -54,9 +54,31 @@
 						  <td class>
 							
 							
-							<a th:href="@{/ingredienti}" class="btn btn-sm btn-warning">
-								Cancella
-							</a>
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-warning" data-bs-toggle="modal" th:data-bs-target="'#delete-modal' + ${ingrediente.id}">
+							  Elimina
+							</button>
+							
+							<div class="modal fade" th:id="'delete-modal' + ${ingrediente.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="staticBackdropLabel">Elimina ingrediente</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							      	Si è sicuri di voler cancellare l'ingrediente [[${ingrediente.nomeIngrediente}]]?
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<form class="d-inline-block" th:action="@{/ingredienti/delete/{id}(id=${ingrediente.id})}" method="POST">
+										<button type="submit" class="btn btn-warning btn-sm " >Elimina</button>	
+									</form>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							
 						  </td>
 					    </tr>
 					  </tbody>
