@@ -43,7 +43,7 @@
 							</form>    
 						</div >
 							
-						<div class="text-center">
+						<div class="text-center" sec:authorize="hasAuthority('ADMIN')">
 							<div class="p-2 fs-4">Crea la tua pizza</div>
 							<a th:href="@{pizzas/create}" class="btn btn-primary btn-lg ps-3"  role="button">Crea</a>
 						</div>
@@ -77,11 +77,11 @@
 									</div>
 									<!--Edit and Delete buttons-->
 									<div >
-										<a class="btn btn-success btn-sm me-1"  th:href="@{/pizzas/edit/{id}(id=${pizza.id})}">Modifica</a>
+										<a class="btn btn-success btn-sm me-1"  th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" sec:authorize="hasAuthority('ADMIN')">Modifica</a>
 										
 										
 										<!-- Button trigger modal -->
-										<button type="button" class="btn btn-warning" data-bs-toggle="modal" th:data-bs-target="'#delete-modal' + ${pizza.id}">
+										<button type="button" class="btn btn-warning" data-bs-toggle="modal" th:data-bs-target="'#delete-modal' + ${pizza.id}" sec:authorize="hasAuthority('ADMIN')">
 										  Elimina
 										</button>
 
