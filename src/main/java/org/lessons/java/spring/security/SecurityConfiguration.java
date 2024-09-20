@@ -23,11 +23,13 @@ public class SecurityConfiguration {
 			.requestMatchers("/pizzas/**").hasAnyAuthority("ADMIN")
 			.requestMatchers("/user").hasAuthority("USER")
 			.requestMatchers("/admin").hasAuthority("ADMIN")
-			.requestMatchers("/").permitAll()
+			.requestMatchers("/**").permitAll()
 			.and().formLogin()
 			.and().logout();
 		return http.build();
 	}
+	
+	
 	
 	@Bean
 	DatabaseUserDetailsService userDetailsService() {
