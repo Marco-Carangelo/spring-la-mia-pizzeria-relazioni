@@ -19,5 +19,10 @@ public class SecurityConfiguration {
 			.and().logout();
 		return http.build();
 	}
+	
+	@Bean
+	DatabaseUserDetailsService userDetailsService() {
+	return new DatabaseUserDetailsService();
+	}
 
 }
