@@ -34,10 +34,10 @@
 		          <a class="nav-link" th:href="@{/pizzas}"  th:classappend="${route == 'pizzas' ? 'active' : 'non-active'}">Pizze</a>
 		        </li>
 				<li class="nav-item">
-		          <a class="nav-link" th:href="@{/offerte}"  th:classappend="${route == 'offerte' ? 'active' : 'non-active'}">Offerte</a>
+		          <a class="nav-link" th:href="@{/offerte}"  th:classappend="${route == 'offerte' ? 'active' : 'non-active'}" sec:authorize="hasAuthority('ADMIN')">Offerte</a>
 		        </li>
 				<li class="nav-item">
-		          <a class="nav-link" th:href="@{/ingredienti}"  th:classappend="${route == 'ingredienti' ? 'active' : 'non-active'}">Ingredienti</a>
+		          <a class="nav-link" th:href="@{/ingredienti}"  th:classappend="${route == 'ingredienti' ? 'active' : 'non-active'}" sec:authorize="hasAuthority('ADMIN')">Ingredienti</a>
 		        </li>
 		      
 		      </ul>
