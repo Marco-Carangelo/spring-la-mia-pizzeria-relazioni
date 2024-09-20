@@ -52,7 +52,7 @@
 					    </div>
 						
 					<!--List of discount-->
-						<div class="col-12 text-center py-2 mb-2">
+						<div class="col-12 text-center py-2 mb-2" sec:authorize="hasAuthority('ADMIN')">
 							<h6>Lista delle offerte </h6>
 							
 							<ul class="d-flex flex-wrap">
@@ -71,7 +71,7 @@
 					    </div>
 						
 						<!--Offerta create form link-->
-						<div class="col-12 text-center py-2 ">
+						<div class="col-12 text-center py-2 " sec:authorize="hasAuthority('ADMIN')">
 							<a th:href="@{/offerte/create/{id}(id=${pizza.id})}" class="btn btn-primary btn-lg"  role="button" aria-disabled="true" >Crea una nuova offerta</a>
 					    </div>
 					
