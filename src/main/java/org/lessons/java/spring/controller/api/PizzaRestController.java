@@ -62,10 +62,15 @@ public class PizzaRestController {
 	}
 	
 	@PutMapping("/{id}")
-	public Pizza update(@RequestBody Pizza pizza, @PathVariable("id") Integer id) {
-		Pizza newPizza = pizzaService.updatePizza(pizza);
+	public ResponseEntity<Pizza> update(@RequestBody Pizza pizza, @PathVariable("id") Integer id) {
+		Optional<Pizza> foundPizza = Optional.of(pizzaService.findPizzaById(id));
 		
-		return newPizza;
+		if(foundPizza.isPresent()) {
+				Pizza pizzaToUpdate = pizzaService.updatePizza(pizza);
+				return new ResponseEntity<>(pizzaToUpdate, HttpStatus.OK);
+			}
+			
+		return new ResponseEntity<>( HttpStatus.NOT_FOUND);
 		
 	}
 	
