@@ -7,6 +7,7 @@ import org.lessons.java.spring.model.Pizza;
 import org.lessons.java.spring.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +39,7 @@ public class PizzaRestController {
 		return result;
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public Pizza show(@PathVariable("id") Integer id) {
 		Optional<Pizza> pizza = Optional.of(pizzaService.findPizzaById(id));
 		
@@ -53,12 +54,17 @@ public class PizzaRestController {
 		
 	}
 	
-	@PutMapping("{id}")
+	@PutMapping("/{id}")
 	public Pizza update(@RequestBody Pizza pizza, @PathVariable("id") Integer id) {
 		Pizza newPizza = pizzaService.updatePizza(pizza);
 		
 		return newPizza;
 		
+	}
+	
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable("id") Integer id) {
+		pizzaService.deletePizzaById(id);
 	}
 	
 			
