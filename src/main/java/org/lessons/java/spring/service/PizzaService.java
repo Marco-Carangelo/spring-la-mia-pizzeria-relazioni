@@ -26,8 +26,8 @@ public class PizzaService {
 		return repository.findById(id).get();
 	}
 	
-	public void createPizza(Pizza pizza){
-		 repository.save(pizza);
+	public Pizza createPizza(Pizza pizza){
+		 return repository.save(pizza);
 	}
 	
 	public void editPizza(Pizza pizza){
