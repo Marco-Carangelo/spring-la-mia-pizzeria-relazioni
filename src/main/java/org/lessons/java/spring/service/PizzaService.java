@@ -18,7 +18,7 @@ public class PizzaService {
 		return repository.findAll();
 	}
 	
-	public List<Pizza> searchPizzas(String name){
+	public List<Pizza> findPizzasByStart(String name){
 		return repository.findByNomeStartsWith(name);
 	}
 	
