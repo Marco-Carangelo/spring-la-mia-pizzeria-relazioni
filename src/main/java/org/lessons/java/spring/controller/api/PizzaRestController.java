@@ -19,6 +19,19 @@ public class PizzaRestController {
 	@Autowired
 	private PizzaService pizzaService;
 	
+	@GetMapping
+	public List<Pizza> index(@RequestParam( name = "searchedText" , required = false ) String searchedText ){
+		
+		List<Pizza> result;
+		
+		if(searchedText != null && !searchedText.isEmpty() ) {
+			 result = pizzaService.findPizzasByStart(searchedText);
+		}else {
+			 result = pizzaService.findPizzas();
+		}
+				
+		return result;
+	}
 	
 			
 			
