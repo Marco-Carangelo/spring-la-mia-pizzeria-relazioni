@@ -11,7 +11,7 @@ public class MiaPizzeriaUtils {
 			formattedPrice =  String.format("%.2f €", price);
 		}else {
 			
-			formattedPrice = "Free Entry";
+			formattedPrice = "Free";
 			
 		}
 		
@@ -29,7 +29,7 @@ public class MiaPizzeriaUtils {
 			formattedPrice =  String.format("%.2f €", price);
 		}else {
 			
-			formattedPrice = "Free Entry";
+			formattedPrice = "Free";
 			
 		}
 		
