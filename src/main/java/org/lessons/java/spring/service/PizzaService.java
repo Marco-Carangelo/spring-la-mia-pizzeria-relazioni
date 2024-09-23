@@ -30,8 +30,8 @@ public class PizzaService {
 		 return repository.save(pizza);
 	}
 	
-	public void editPizza(Pizza pizza){
-		 repository.save(pizza);
+	public Pizza updatePizza(Pizza pizza){
+		return repository.save(pizza);
 	}
 	
 	public void deletePizzaById(Integer id){
