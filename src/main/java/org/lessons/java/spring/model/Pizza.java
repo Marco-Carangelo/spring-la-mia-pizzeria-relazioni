@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -51,6 +54,7 @@ public class Pizza {
 	private LocalDateTime updatedAt;
 	
 	@OneToMany(mappedBy = "pizza")
+	@JsonManagedReference
 	private List<Offerta> offerte;
 	
 	@ManyToMany()
@@ -59,6 +63,7 @@ public class Pizza {
 			joinColumns = @JoinColumn(name = "pizza_id"),
 			inverseJoinColumns = @JoinColumn (name = "ingrediente_id")
 	)
+	@JsonBackReference
 	private List<Ingrediente> ingredienti;
 	
 	
