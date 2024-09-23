@@ -2,7 +2,9 @@ package org.lessons.java.spring.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -18,6 +20,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -66,6 +69,14 @@ public class Pizza {
 	@JsonBackReference
 	private List<Ingrediente> ingredienti;
 	
+	//@Transient
+	@Formula("(SELECT o.percentuale_sconto " +
+			 "FROM pizzas p " +
+			 "INNER JOIN offerte o " +
+			 "ON p.id = o.pizza_id " +
+			 "WHERE p.id = id " +
+			 "AND curdate() BETWEEN o.inizio_offerta AND o.fine_offerta)")
+	private Integer sconto;
 	
 	public Pizza() {
 		
@@ -107,7 +118,13 @@ public class Pizza {
 	}
 
 	public double getPrezzo() {
-		return prezzo;
+		
+		if(sconto == null) {
+			
+			return prezzo;
+		}
+		
+		return prezzo * (100 - sconto) / 100;
 	}
 
 	public void setPrezzo(double prezzo) {
@@ -159,6 +176,12 @@ public class Pizza {
 	public void setIngredienti(List<Ingrediente> ingredienti) {
 		this.ingredienti = ingredienti;
 	}
+
+
+	public Integer getSconto() {
+		return sconto;
+	}
+	
 	
 	
 
