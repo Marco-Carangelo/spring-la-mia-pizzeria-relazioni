@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.lessons.java.spring.model.Pizza;
 import org.lessons.java.spring.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,10 +42,15 @@ public class PizzaRestController {
 	}
 	
 	@GetMapping("/{id}")
-	public Pizza show(@PathVariable("id") Integer id) {
+	public ResponseEntity<Pizza> show(@PathVariable("id") Integer id) {
 		Optional<Pizza> pizza = Optional.of(pizzaService.findPizzaById(id));
 		
-		return pizza.get();
+		if(pizza.isPresent()) {
+			
+			return new ResponseEntity<>(pizza.get(), HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>( HttpStatus.NOT_FOUND);
 	}
 	
 	@PostMapping
