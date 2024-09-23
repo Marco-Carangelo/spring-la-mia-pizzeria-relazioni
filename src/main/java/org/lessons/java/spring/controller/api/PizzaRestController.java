@@ -75,8 +75,16 @@ public class PizzaRestController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable("id") Integer id) {
-		pizzaService.deletePizzaById(id);
+	public ResponseEntity<Pizza> delete(@PathVariable("id") Integer id) {
+		
+		Optional<Pizza> foundPizza = Optional.of(pizzaService.findPizzaById(id));
+		
+		if(foundPizza.isPresent()) {
+				pizzaService.deletePizzaById(id);
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+			
+		return new ResponseEntity<>( HttpStatus.NOT_FOUND);
 	}
 	
 			
